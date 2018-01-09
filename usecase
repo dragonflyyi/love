@@ -1,0 +1,37 @@
+@startuml
+
+(字典类型管理)  as dictTypeMng
+	(字典类型增加)  as createDictType
+	(字典类型修改)  as updateDictType
+	(字典类型查询)  as retrieveDictType
+	(字典类型删除)  as deleteDictType
+
+(字典项目管理) as  dictItemMng 
+
+    (字典项目增加)  as createDictItem
+	(字典项目修改)  as updateDictItem
+	(字典项目查询)  as retrieveDictItem
+	(字典项目删除)  as deleteDictItem
+
+    
+   :Administrator: as user
+    user  -left-> dictTypeMng  
+   dictTypeMng .up-> createDictType : include
+   dictTypeMng .left-> retrieveDictType : include
+   dictTypeMng .-> updateDictType: include
+   dictTypeMng .-> deleteDictType: include
+   
+    user  -right-> dictItemMng 
+    dictItemMng  .up->  createDictItem : include
+    dictItemMng  .right->  retrieveDictItem : include
+    dictItemMng  .->  updateDictItem : include
+    dictItemMng  .->  deleteDictItem : include
+   
+    dictItemMng .up-> (exception) : <<exclude>>
+    dictTypeMng .up-> (exception) : <<exclude>>
+    
+    note bottom of user : 用户管理字典
+    note top of (exception) : 处理各种异常
+    
+  
+@enduml
